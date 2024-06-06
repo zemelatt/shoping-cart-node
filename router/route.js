@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const { upload } = require("../imgUploader/uploader");
 const {
   addProduct,
@@ -21,16 +22,20 @@ const {
 } = require("../routeControler/catagory");
 
 router.get("/products", getAllProduct);
-router.post("/add/products", upload.single("myPhoto"), addProduct);
+router.get("/products/:id", getOneProduct);
+router.get("/all/catagory", getAllCatagory);
+router.get("/add/catagory/:id", getOne);
 router.get("/add/to/cart/products/:id", toCart);
+
+router.post("/add/products", upload.single("myPhoto"), addProduct);
 router.post("/login", upload.single("myPhoto"), getUser);
 router.post("/new/user", addNewUser);
 router.post("/add/catagory", addCatagory);
-router.get("/all/catagory", getAllCatagory);
-router.get("/add/catagory/:id", getOne);
-router.put("/edit/catagory/:id", editCatagory);
-router.delete("/delete/catagory/:id", deleteCatagory);
-router.get("/products/:id", getOneProduct);
+
 router.put("/edit/product/:id", upload.single("myPhoto"), editProduct);
+router.put("/edit/catagory/:id", editCatagory);
+
+router.delete("/delete/catagory/:id", deleteCatagory);
 router.delete("/delete/product/:id", deleteProduct);
+
 module.exports = router;
